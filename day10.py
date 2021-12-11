@@ -71,7 +71,6 @@ def solve_a(input):
             elif c == '<':
                 score += 4
         completion_scores.append(score)
-
     return statistics.median(completion_scores)
 
 if __name__ == '__main__':
