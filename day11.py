@@ -19,11 +19,9 @@ def flash(octopi, i, j):
         for y in range(j - 1, j + 2):
             if not (x == i and y == j) and in_bounds(x,y) and octopi[x][y] != 0:
                 octopi[x][y] += 1
-    for x in range(i - 1, i + 2):
-        for y in range(j - 1, j + 2):
-            if not (x == i and y == j) and in_bounds(x,y):
                 if octopi[x][y] > 9:
                     flash(octopi, x, y)
+
 
 
 
@@ -32,8 +30,6 @@ def solve_a(octopi):
         for i, row in enumerate(octopi):
             for j, octopus in enumerate(row):
                 octopi[i][j] += 1
-        for i, row in enumerate(octopi):
-            for j, octopus in enumerate(row):
                 if octopus > 9:
                     flash(octopi, i, j)
     return flashes
