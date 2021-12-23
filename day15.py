@@ -2,7 +2,7 @@ from math import inf
 
 
 def get_input():
-    in_file = open('test_in15.txt', 'r')
+    in_file = open('in15.txt', 'r')
     lines = [line for line in in_file.read().split('\n')]
     matrix = [[int(entry) for entry in line] for line in lines]
     in_file.close()
@@ -18,15 +18,28 @@ def edge_weight(matrix, u, v):
         return matrix[v[0]][v[1]]
     return inf
 
+
 def in_bounds(matrix, i, j):
     if i < 0 or i >= len(matrix) or j < 0 or j >= len(matrix[0]):
         return False
     return True
 
+
 def make_big_matrix(small_matrix):
+    L = len(small_matrix)
     matrix = [row * 5 for row in small_matrix]
-    matrix *= 5
-    pass
+    for _ in range(4):
+        for i in range(L):
+            matrix.append(list(matrix[i]))
+    for i in range(L * 5):
+        for j in range(L * 5):
+            if i >= L:
+                matrix[i][j] = matrix[i - L][j] + 1
+            elif j >= L:
+                matrix[i][j] = matrix[i][j - L] + 1
+            if matrix[i][j] == 10:
+                matrix[i][j] = 1
+    return matrix
 
 
 def solve_a(matrix):
@@ -84,4 +97,5 @@ def solve_b(matrix):
 
 if __name__ == '__main__':
     input = get_input()
-    print(solve_b(input))
+    matrix = make_big_matrix(input)
+    print(solve_a(matrix))
